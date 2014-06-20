@@ -1,0 +1,11 @@
+{
+    "name": "phpteam-pro/kohana-task-launcher",
+    "description": "Launching and stopping Kohana 3.3 Miniond tasks",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Andrey Murashkin",
+            "email": "andrey@phpteam.pro"
+        }
+    ]
+}

@@ -24,7 +24,7 @@ class Task_TaskLauncher extends Minion_Task {
 			Minion_CLI::write('Current speciments: ' . print_r($this->_getCurrentSpecimens(), true));
 		}
 		foreach($aToLaunch as $aSpecimen) {
-			Minion_CLI::write('Launching following task: ' . print_r($aSpecimen));
+			Minion_CLI::write('Launching following task: ' . print_r($aSpecimen, true));
 			self::_launchSpecimen($aSpecimen);
 		}
 

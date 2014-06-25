@@ -14,11 +14,14 @@ class Task_TaskLauncher extends Minion_Task {
 	);
 
 	protected function _execute(array $aParams) {
-		$cCompare = function($aArr1, $aArr2) {
-			return $aArr1['params'] == $aArr2['params'];
+		$aExistingValuesList = $this->_getCurrentSpecimens();
+
+		$cFilter = function($mValue) use($aExistingValuesList) {
+			return !in_array($mValue, $aExistingValuesList);
 		};
 
-		$aToLaunch = array_udiff($this->_getNeededSpecimens(), $this->_getCurrentSpecimens(), $cCompare);
+		$aToLaunch = array_filter($this->_getNeededSpecimens(), $cFilter);
+
 		Minion_CLI::write('TO launch count: ' . count($aToLaunch));
 		if(!$aToLaunch) {
 			Minion_CLI::write('Current speciments: ' . print_r($this->_getCurrentSpecimens(), true));
@@ -28,9 +31,7 @@ class Task_TaskLauncher extends Minion_Task {
 			self::_launchSpecimen($aSpecimen);
 		}
 
-		foreach(array_udiff($this->_getCurrentSpecimens(), $this->_getNeededSpecimens(), $cCompare) as $aSpecimen) {
-			self::_stopSpecimen($aSpecimen);
-		}
+		// TODO: stop tasks
 	}
 
 	protected function _getCurrentSpecimens() {

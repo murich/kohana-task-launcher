@@ -107,7 +107,7 @@ class Task_TaskLauncher extends Minion_Task {
 			$sParamsLine .= '--' . $sOption . '=' . $sValue . ' ';
 		}
 
-		$sCommand =  MODPATH . 'minion/miniond '. $sParamsLine .' &';
+		$sCommand =  'cd '. MODPATH . 'minion && ./miniond '. $sParamsLine .' &';
 
 		Kohana::$log->add(Kohana_Log::INFO, 'Going to run following minion job: ' . $sCommand);
 		Minion_CLI::write($sCommand);
